@@ -1,0 +1,1 @@
+﻿This is a template Asp.Net core tempalte with clarim based authentication.
