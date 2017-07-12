@@ -14,6 +14,8 @@ using Website.Models;
 using Website.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.ResponseCompression;
 using Website.Extensions;
 
 namespace Website
@@ -63,8 +65,29 @@ namespace Website
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, SMSClaimsPrincipalFactory>();
 
+            //add gzip if needed
+            //services.Configure<GzipCompressionProviderOptions>(options => options.Level = System.IO.Compression.CompressionLevel.Fastest);
+
+            //services.AddResponseCompression(options =>
+            //{
+            //    options.EnableForHttps = true;
+            //    options.Providers.Add<GzipCompressionProvider>();
+
+            //    options.MimeTypes = new[] { "text/plain", "application/json", "text/html" };
+            //    //"text/plain",
+            //    //"text/css",
+            //    //"application/javascript",
+            //    //"text/html",
+            //    //"application/xml",
+            //    //"text/xml",
+            //    //"application/json",
+            //    //"text/json",
+            //});
 
             services.AddMvc();
+
+            //add cookie supported
+            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
 
             //if need tempdata
             //services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
